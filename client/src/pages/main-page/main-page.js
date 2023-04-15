@@ -1,29 +1,45 @@
+import "./main-page.css";
+
+import micSvg from "../../assets/img/mic.svg";
+import avatarImg from "../../assets/img/avatar.jpg";
+import download from "../../assets/img/download.png";
+
 export const Main = () => {
   return (
-    <div class="container">
-      <header class="header">
-        <section class="header-left">
-          <button class="toggle-menu">
+    <div className="main-page__container">
+      <header className="header">
+        <section className="header-left">
+          <button className="toggle-menu">
             <svg
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               focusable="false"
-              style="pointer-events: none; display: block; width: 30px; height: 30px;"
+              style={{
+                pointerEvents: "none",
+                display: "block",
+                width: 30,
+                height: 30,
+              }}
             >
               <g>
                 <path
                   d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-                  class="style-scope yt-icon"
+                  className="style-scope yt-icon"
                 ></path>
               </g>
             </svg>
           </button>
           <a href="./index.html" title="YouTube Home">
             <svg
-              viewbox="0 0 200 60"
+              viewBox="0 0 200 60"
               focusable="false"
-              style="pointer-events: none; display: block; width: 100px; height: 30px;"
+              style={{
+                pointerEvents: "none",
+                display: "block",
+                width: 100,
+                height: 30,
+              }}
             >
-              <g viewbox="0 0 200 60" class="style-scope yt-icon">
+              <g viewBox="0 0 200 60" className="style-scope yt-icon">
                 <g>
                   <path
                     fill="#FF0000"
@@ -34,7 +50,7 @@ export const Main = () => {
                     points="26.6,39.43 42.93,30 26.6,20.57"
                   ></polygon>
                 </g>
-                <g class="style-scope yt-icon">
+                <g className="style-scope yt-icon">
                   <g id="youtube-paths">
                     <path d="M92.69,48.03c-1.24-0.84-2.13-2.14-2.65-3.91c-0.52-1.77-0.79-4.12-0.79-7.06v-4 c0-2.97,0.3-5.35,0.9-7.15c0.6-1.8,1.54-3.11,2.81-3.93c1.27-0.82,2.94-1.24,5.01-1.24c2.04,0,3.67,0.42,4.9,1.26 c1.23,0.84,2.13,2.15,2.7,3.93c0.57,1.78,0.85,4.16,0.85,7.12v4c0,2.94-0.28,5.3-0.83,7.08c-0.55,1.78-1.45,3.09-2.7,3.91 c-1.24,0.82-2.93,1.24-5.06,1.24C95.65,49.29,93.93,48.87,92.69,48.03z M99.66,43.71c0.34-0.9,0.52-2.37,0.52-4.4v-8.59 c0-1.98-0.17-3.42-0.52-4.34c-0.34-0.91-0.95-1.37-1.82-1.37c-0.84,0-1.43,0.46-1.78,1.37c-0.34,0.91-0.52,2.36-0.52,4.34v8.59 c0,2.04,0.16,3.51,0.49,4.4c0.33,0.9,0.93,1.35,1.8,1.35C98.71,45.06,99.31,44.61,99.66,43.71z"></path>
                     <path d="M188.16,37.13v1.39c0,1.77,0.05,3.09,0.16,3.98c0.1,0.88,0.32,1.53,0.65,1.93 c0.33,0.4,0.84,0.61,1.53,0.61c0.93,0,1.57-0.36,1.91-1.08c0.34-0.72,0.53-1.92,0.56-3.6l5.35,0.31 c0.03,0.24,0.04,0.57,0.04,0.99c0,2.55-0.7,4.45-2.09,5.71c-1.39,1.26-3.36,1.89-5.91,1.89c-3.06,0-5.2-0.96-6.43-2.88 c-1.23-1.92-1.84-4.88-1.84-8.9v-4.81c0-4.14,0.64-7.15,1.91-9.06c1.27-1.9,3.45-2.85,6.54-2.85c2.13,0,3.76,0.39,4.9,1.17 c1.14,0.78,1.94,1.99,2.41,3.64c0.46,1.65,0.7,3.93,0.7,6.83v4.72H188.16z M188.95,25.53c-0.31,0.39-0.52,1.03-0.63,1.91 c-0.11,0.88-0.16,2.23-0.16,4.02v1.98h4.54v-1.98c0-1.77-0.06-3.11-0.18-4.02c-0.12-0.91-0.34-1.56-0.65-1.93 c-0.31-0.37-0.8-0.56-1.46-0.56C189.75,24.94,189.26,25.14,188.95,25.53z"></path>
@@ -49,22 +65,27 @@ export const Main = () => {
             </svg>
           </a>
         </section>
-        <form action="#" class="search-box">
+        <form action="#" className="search-box">
           <input
             list="datalist"
             type="text"
             placeholder="Search"
-            class="search-input"
+            className="search-input"
           />
           <datalist id="datalist">
             <option value="Falonchiga otvet" />
             <option value="nima gap" />
           </datalist>
-          <button type="submit" class="search-btn hover-after">
+          <button type="submit" className="search-btn hover-after">
             <svg
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               focusable="false"
-              style="pointer-events: none; display: block; width: 20px; height: 25px;"
+              style={{
+                pointerEvents: "none",
+                display: "block",
+                width: 20,
+                height: 25,
+              }}
             >
               <g>
                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
@@ -72,62 +93,92 @@ export const Main = () => {
             </svg>
           </button>
           <button
-            class="search-btn hover-after"
-            style="background: none; border: none; margin-left: 10px; width: 20px;"
+            className="search-btn hover-after"
+            style={{
+              background: "none",
+              border: "none",
+              marginLeft: 10,
+              width: 20,
+            }}
           >
-            <img src="img/mic.svg" alt="mic" width="20" height="25" />
+            <img src={micSvg} alt="mic" width={20} height={25} />
           </button>
         </form>
-        <section class="header-right">
-          <button type="button" class="voice-btn hover-after">
+        <section className="header-right">
+          <button type="button" className="voice-btn hover-after">
             <svg
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               focusable="false"
-              style="pointer-events: none; display: block; width: 30px; height: 30px;"
+              style={{
+                pointerEvents: "none",
+                display: "block",
+                width: 30,
+                height: 30,
+              }}
             >
               <g>
                 <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"></path>
               </g>
             </svg>
           </button>
-          <button type="submit" class="search-btn hover-after">
+          <button type="submit" className="search-btn hover-after">
             <svg
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               focusable="false"
-              style="pointer-events: none; display: block; width: 20px; height: 20px;"
+              style={{
+                pointerEvents: "none",
+                display: "block",
+                width: 20,
+                height: 20,
+              }}
             >
               <g>
                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
               </g>
             </svg>
           </button>
-          <button class="hover-after">
+          <button className="hover-after">
             <svg
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               focusable="false"
-              style="pointer-events: none; display: block; width: 30px; height: 30px;"
+              style={{
+                pointerEvents: "none",
+                display: "block",
+                width: 30,
+                height: 30,
+              }}
             >
               <g>
                 <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"></path>
               </g>
             </svg>
           </button>
-          <button class="hover-after">
+          <button className="hover-after">
             <svg
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               focusable="false"
-              style="pointer-events: none; display: block; width: 30px; height: 30px;"
+              style={{
+                pointerEvents: "none",
+                display: "block",
+                width: 30,
+                height: 30,
+              }}
             >
               <g>
                 <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"></path>
               </g>
             </svg>
           </button>
-          <button class="hover-after">
+          <button className="hover-after">
             <svg
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               focusable="false"
-              style="pointer-events: none; display: block; width: 30px; height: 24px;"
+              style={{
+                pointerEvents: "none",
+                display: "block",
+                width: 30,
+                height: 24,
+              }}
             >
               <g>
                 <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path>
@@ -136,30 +187,35 @@ export const Main = () => {
           </button>
           <a href="./register.html">
             <img
-              class="avatar-img"
-              src="./img/avatar.jpg"
+              className="avatar-img"
+              src={avatarImg}
               alt="avatar-img"
-              width="32px"
-              height="32px"
+              width={32}
+              height={32}
             />
           </a>
         </section>
       </header>
-      <main class="main">
-        <div class="left-menu-wrapper">
-          <ul class="navbar-list">
+      <main className="main">
+        <div className="left-menu-wrapper">
+          <ul className="navbar-list">
             <h1>YouTube Members</h1>
-            <li class="channel active" data_id="main">
+            <li className="channel active" data_id="main">
               <a href="#">
                 <svg
-                  viewbox="0 0 24 24"
+                  viewBox="0 0 24 24"
                   focusable="false"
-                  style="pointer-events: none; display: block; width: 30px; height: 30px;"
+                  style={{
+                    pointerEvents: "none",
+                    display: "block",
+                    width: 30,
+                    height: 30,
+                  }}
                 >
                   <g>
                     <path
                       d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8"
-                      class="style-scope yt-icon"
+                      className="style-scope yt-icon"
                     ></path>
                   </g>
                 </svg>
@@ -167,7 +223,7 @@ export const Main = () => {
               </a>
             </li>
 
-            <li class="channel" data-id="1">
+            <li className="channel" data-id="1">
               <a href="#">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/146/146031.png"
@@ -180,25 +236,25 @@ export const Main = () => {
             </li>
           </ul>
         </div>
-        <div class="iframes-wrapper">
-          <ul class="iframes-list">
-            <li class="iframe">
+        <div className="iframes-wrapper">
+          <ul className="iframes-list">
+            <li className="iframe">
               <video
                 src="https://www.w3schools.com/html/mov_bbb.mp4"
                 controls=""
               ></video>
-              <div class="iframe-footer">
+              <div className="iframe-footer">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/146/146031.png"
                   alt="channel-icon"
                 />
-                <div class="iframe-footer-text">
-                  <h2 class="channel-name">Hikmat</h2>
-                  <h3 class="iframe-title">Falonchiga otvet</h3>
-                  <time class="uploaded-time">2020/02/08 | 15.24</time>
-                  <a class="download" href="#">
+                <div className="main_page__iframe-footer-text">
+                  <h2 className="main-page__channel-name">Hikmat</h2>
+                  <h3 className="iframe-title">Falonchiga otvet</h3>
+                  <time className="uploaded-time">2020/02/08 | 15.24</time>
+                  <a className="download" href="#">
                     <span>20 MB</span>
-                    <img src="./img/download.png" />
+                    <img src={download} />
                   </a>
                 </div>
               </div>
