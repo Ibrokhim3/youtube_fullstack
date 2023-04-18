@@ -1,12 +1,14 @@
 import "./register-page.css";
 import signUpImg from "../../assets/img/signup-image.jpg";
 import { useRef, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [img, setImg] = useState("");
 
-  const handleLoginSubmit = (evt) => {
+  const navigate = useNavigate();
+
+  const handleRegSubmit = (evt) => {
     evt.preventDefault();
 
     const imageInput = document.getElementById("uploadInput");
@@ -21,11 +23,18 @@ export const Register = () => {
       method: "POST",
       body: formData,
     })
-      .then((response) => {
-        console.log("Image uploaded successfully");
+      .then((res) => {
+        if (res.status === 201) {
+          return res.text();
+        }
+        return Promise.reject(res);
       })
-      .catch((error) => {
-        console.error("Error uploading image:", error);
+      .then((data) => {
+        alert(data);
+        navigate("/login");
+      })
+      .catch((err) => {
+        alert("Something went wrong");
       });
   };
 
@@ -33,7 +42,7 @@ export const Register = () => {
     <div class="container">
       <div class="wrapper">
         <h1 class="title">Registration Page</h1>
-        <form onSubmit={handleLoginSubmit} action="#" class="site-form">
+        <form onSubmit={handleRegSubmit} action="#" class="site-form">
           <label>
             <span class="zmdi zmdi-account"></span>
             <input
@@ -66,9 +75,9 @@ export const Register = () => {
           </label>
           <input type="submit" value="Register" id="submitButton" />
         </form>
-        <a href="./login.html" class="sign-link">
+        <Link to={"/login"} class="sign-link">
           I am already member
-        </a>
+        </Link>
         <img src={signUpImg} alt="signup-image" class="signup-image" />
       </div>
     </div>

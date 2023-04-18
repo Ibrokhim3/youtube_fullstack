@@ -3,6 +3,7 @@ import "./main-page.css";
 import micSvg from "../../assets/img/mic.svg";
 import avatarImg from "../../assets/img/avatar.jpg";
 import download from "../../assets/img/download.png";
+import { Link } from "react-router-dom";
 
 export const Main = () => {
   return (
@@ -185,7 +186,7 @@ export const Main = () => {
               </g>
             </svg>
           </button>
-          <a href="./register.html">
+          <Link to={"/admin"}>
             <img
               className="avatar-img"
               src={avatarImg}
@@ -193,7 +194,7 @@ export const Main = () => {
               width={32}
               height={32}
             />
-          </a>
+          </Link>
         </section>
       </header>
       <main className="main">

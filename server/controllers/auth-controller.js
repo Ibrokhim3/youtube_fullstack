@@ -16,7 +16,7 @@ export const authCtr = {
     );
 
     if (foundedUser.rows[0]) {
-      return res.status(400).send("Username already exists");
+      return res.send("Username already exists");
     }
 
     const hashPsw = await bcrypt.hash(password, 12);
@@ -48,7 +48,7 @@ export const authCtr = {
     //     return res.send("File uploaded");
     //   }
     // });
-    res.status(201).send("User successfully regsitrated!");
+    res.status(201).send("User successfully registrated!");
   },
   GET_USERS: async (req, res) => {
     const { id } = req.params;
@@ -100,7 +100,7 @@ export const authCtr = {
           token,
         ]);
 
-        return res.send({
+        return res.status(201).send({
           msg: `You're logged in as a(n) ${user_name}!`,
           token,
         });
