@@ -6,6 +6,11 @@ import signUpImg from "../../assets/img/signin-image.jpg";
 import deleteIcon from "../../assets/img/delete.png";
 
 export const Admin = () => {
+  const token = localStorage.getItem("token");
+  const handleFormSubmit = async (req, res) => {
+    fetch("http://localhost:3005/admin/add-video", {});
+  };
+
   return (
     <div className="admin-container">
       <header className="header">

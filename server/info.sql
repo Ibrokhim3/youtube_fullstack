@@ -25,10 +25,13 @@ CREATE TABLE jwt(
 CREATE TABLE videos(
     id VARCHAR UNIQUE NOT NULL DEFAULT gen_random_uuid(),
     video_title VARCHAR NOT NULL,
-    created_by VARCHAR(50) UNIQUE NOT NULL,
+    created_by VARCHAR NOT NULL,
 
     CONSTRAINT fk_created_by
     FOREIGN KEY(created_by)
     REFERENCES users(user_id)
 );
+
+ALTER TABLE videos
+DROP CONSTRAINT videos_created_by_key;
 

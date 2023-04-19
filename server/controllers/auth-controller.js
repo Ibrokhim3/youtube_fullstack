@@ -70,6 +70,7 @@ export const authCtr = {
           {
             user_id: foundedUser.rows[0].user_id,
             user_name: foundedUser.rows[0].user_name,
+            image_title: foundedUser.rows[0].image_title,
           },
           process.env.SECRET_KEY,
           {
@@ -78,21 +79,20 @@ export const authCtr = {
         );
 
         const userInfo = jwt.verify(token, process.env.SECRET_KEY);
-        const { user_id, user_name } = userInfo;
+        const { user_id, user_name, image_title } = userInfo;
 
         const jwtInfo = await pool.query(`SELECT * FROM JWT`);
 
         if (!jwtInfo.rows[0]) {
           await pool.query(
-            `INSERT INTO jwt(user_id, user_name, token) VALUES($1, $2,$3) `,
-            [user_id, user_name, token]
+            `INSERT INTO jwt(user_id, user_name, image_title, token) VALUES($1, $2,$3, $4) `,
+            [user_id, user_name, image_title, token]
           );
         }
-        await pool.query(`UPDATE jwt SET user_id=$1, user_name=$2, token=$3 `, [
-          user_id,
-          user_name,
-          token,
-        ]);
+        await pool.query(
+          `UPDATE jwt SET user_id=$1, user_name=$2,  image_title=$3, token=$4`,
+          [user_id, user_name, image_title, token]
+        );
 
         return res.status(201).send({
           msg: `You're logged in as a(n) ${user_name}!`,

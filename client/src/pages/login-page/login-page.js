@@ -27,12 +27,12 @@ export const Login = () => {
         }
         return Promise.reject(res);
       })
-      .then((data) => {
+      .then(async (data) => {
         alert("You're logged in");
         const { token } = data;
         userToken = token;
+        localStorage.setItem("token", userToken);
         navigate("/youtube");
-        localStorage.setItem();
       })
       .catch((err) => {
         alert("Something went wrong");
