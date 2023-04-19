@@ -7,6 +7,7 @@ import deleteIcon from "../../assets/img/delete.png";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Admin = () => {
+  const video = "https://www.w3schools.com/html/mov_bbb.mp4";
   const navigate = useNavigate();
 
   const handleFormSubmit = (evt) => {
@@ -25,6 +26,7 @@ export const Admin = () => {
     fetch("http://localhost:3005/admin/add-video", {
       method: "POST",
       body: formData,
+      headers: { Authentication: `Bearer ${token}` },
     })
       .then((res) => {
         if (res.status === 201) {
@@ -112,11 +114,10 @@ export const Admin = () => {
         <div className="admin-wrapper">
           <ul className="videos-list">
             <li className="video-item">
-              <video
-                src="https://www.w3schools.com/html/mov_bbb.mp4"
-                controls=""
-              ></video>
-              <p className="content" data-id="2" contenteditable="true">
+              <video height="100%" width="100" controls>
+                <source src={video} type="video/mp4" />
+              </video>
+              <p className="content" data-id="2" contentEditable="true">
                 dars
               </p>
               <img

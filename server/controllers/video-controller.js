@@ -7,6 +7,7 @@ const { user_id, user_name, image_title } = userData.rows[0];
 export const videoCtr = {
   ADD_VIDEO: async (req, res) => {
     try {
+      console.log(req.headers);
       const { video_title } = req.body;
       const { name, data, mimetype, size } = req.files.video;
 

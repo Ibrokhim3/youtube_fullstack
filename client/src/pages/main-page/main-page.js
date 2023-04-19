@@ -241,7 +241,9 @@ export const Main = () => {
         <div className="iframes-wrapper">
           <ul className="iframes-list">
             <li className="iframe">
-              <video src={video} controls=""></video>
+              <video height="100%" width="100" controls>
+                <source src={video} type="video/mp4" />
+              </video>
               <div className="iframe-footer">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/146/146031.png"
