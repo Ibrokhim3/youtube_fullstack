@@ -38,8 +38,6 @@ export const authCtr = {
     req.files.img.mv("./upload_img/" + filename, function (err) {
       if (err) {
         return res.send(err);
-      } else {
-        return res.send("File uploaded");
       }
     });
     return res.status(201).send("User successfully registrated!");

@@ -22,7 +22,6 @@ export const videoCtr = {
           return res.send(err);
         }
       });
-
       res.status(201).send("Video uploaded successfully!");
     } catch (error) {
       return console.log(error.message);

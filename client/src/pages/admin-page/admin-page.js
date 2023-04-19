@@ -4,18 +4,47 @@ import "../../assets/css/material-icon.css";
 import "../../assets/css/material-icon-design.css";
 import signUpImg from "../../assets/img/signin-image.jpg";
 import deleteIcon from "../../assets/img/delete.png";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Admin = () => {
-  const token = localStorage.getItem("token");
-  const handleFormSubmit = async (req, res) => {
-    fetch("http://localhost:3005/admin/add-video", {});
+  const navigate = useNavigate();
+
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+
+    const token = localStorage.getItem("token");
+
+    const videoInput = document.getElementById("uploadInputVideo");
+    const videoFile = videoInput.files[0];
+
+    const formData = new FormData();
+
+    formData.append("video_title", evt.target.video_title.value);
+    formData.append("video", videoFile);
+
+    fetch("http://localhost:3005/admin/add-video", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          return res.text();
+        }
+        return Promise.reject(res);
+      })
+      .then((data) => {
+        alert(data);
+      })
+      .catch(() => {
+        alert("Something went wrong");
+      });
   };
 
   return (
     <div className="admin-container">
       <header className="header">
         <section className="header-left">
-          <a href="./index.html" title="YouTube Home">
+          <Link to={"/youtube"} title="YouTube Home">
             <svg
               viewBox="0 0 200 60"
               focusable="false"
@@ -50,13 +79,13 @@ export const Admin = () => {
                 </g>
               </g>
             </svg>
-          </a>
+          </Link>
         </section>
       </header>
       <main className="main">
         <div className="admin-wrapper">
           <h1 className="title">Upload a video</h1>
-          <form className="site-form">
+          <form onSubmit={handleFormSubmit} className="site-form">
             <label>
               <input
                 name="video_title"
@@ -69,7 +98,12 @@ export const Admin = () => {
             <label className="custom-upload">
               <span className="zmdi zmdi-upload"></span>
               <span className="file-name">click upload a video</span>
-              <input type="file" id="uploadInput" accept="video/*" />
+              <input
+                name="video"
+                type="file"
+                id="uploadInputVideo"
+                accept="video/*"
+              />
             </label>
             <input type="submit" value="Upload" id="submitButton" />
           </form>
