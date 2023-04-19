@@ -7,7 +7,6 @@ export const authCtr = {
   REGISTER: async (req, res) => {
     const { username, password } = req.body;
     const { name, data, mimetype, size } = req.files.img;
-    // const filepath = req.files.file.tempFilePath;
     const filename = Date.now() + path.extname(name);
 
     const foundedUser = await pool.query(
@@ -21,19 +20,14 @@ export const authCtr = {
 
     const hashPsw = await bcrypt.hash(password, 12);
 
-    await pool.query(`INSERT INTO images (img_name, img) VALUES ($1,$2)`, [
-      filename,
-      data,
-    ]);
-
-    const imgId = await pool.query(
-      `SELECT image_id from images where img_name=$1 `,
-      [filename]
-    );
+    // const imgId = await pool.query(
+    //   `SELECT image_id from images where img_name=$1 `,
+    //   [filename]
+    // );
 
     await pool.query(
-      `INSERT INTO users(user_name, password, image_id) VALUES($1, $2, $3)`,
-      [username, hashPsw, imgId.rows[0].image_id]
+      `INSERT INTO users(user_name, password, image_title) VALUES($1, $2, $3)`,
+      [username, hashPsw, filename]
     );
 
     // await pool.query(
@@ -41,14 +35,14 @@ export const authCtr = {
     //   [filename, filepath, mimetype, size, foundedUser.rows[0].id]
     // );
 
-    // req.files.file.mv("./images/" + filename, function (err) {
-    //   if (err) {
-    //     return res.send(err);
-    //   } else {
-    //     return res.send("File uploaded");
-    //   }
-    // });
-    res.status(201).send("User successfully registrated!");
+    req.files.img.mv("./upload_img/" + filename, function (err) {
+      if (err) {
+        return res.send(err);
+      } else {
+        return res.send("File uploaded");
+      }
+    });
+    return res.status(201).send("User successfully registrated!");
   },
   GET_USERS: async (req, res) => {
     const { id } = req.params;

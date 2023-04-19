@@ -32,6 +32,7 @@ export const Login = () => {
         const { token } = data;
         userToken = token;
         navigate("/youtube");
+        localStorage.setItem();
       })
       .catch((err) => {
         alert("Something went wrong");

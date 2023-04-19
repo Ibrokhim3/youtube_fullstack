@@ -51,9 +51,10 @@ export const Admin = () => {
       <main className="main">
         <div className="admin-wrapper">
           <h1 className="title">Upload a video</h1>
-          <form action="#" className="site-form">
+          <form className="site-form">
             <label>
               <input
+                name="video_title"
                 type="text"
                 id="videoInput"
                 placeholder="video title"

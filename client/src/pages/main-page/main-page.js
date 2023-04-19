@@ -6,6 +6,7 @@ import download from "../../assets/img/download.png";
 import { Link } from "react-router-dom";
 
 export const Main = () => {
+  const video = "https://www.w3schools.com/html/mov_bbb.mp4";
   return (
     <div className="main-page__container">
       <header className="header">
@@ -240,10 +241,7 @@ export const Main = () => {
         <div className="iframes-wrapper">
           <ul className="iframes-list">
             <li className="iframe">
-              <video
-                src="https://www.w3schools.com/html/mov_bbb.mp4"
-                controls=""
-              ></video>
+              <video src={video} controls=""></video>
               <div className="iframe-footer">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/146/146031.png"
