@@ -4,9 +4,36 @@ import micSvg from "../../assets/img/mic.svg";
 import avatarImg from "../../assets/img/avatar.jpg";
 import download from "../../assets/img/download.png";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { VideoItem } from "../../components/video-item/video-item";
 
 export const Main = () => {
-  const video = "https://www.w3schools.com/html/mov_bbb.mp4";
+  const [videos, setVideos] = useState();
+  useEffect(() => {
+    const dataFetch = async () => {
+      await fetch("http://localhost:3005/admin/videos", {
+        method: "GET",
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            return res.json();
+          }
+          return Promise.reject(res);
+        })
+        .then((data) => {
+          if (data) {
+            setVideos(data);
+          }
+        })
+        .catch((err) => {
+          return console.log(err);
+        });
+    };
+    dataFetch();
+  }, []);
+
+  console.log(videos);
+
   return (
     <div className="main-page__container">
       <header className="header">
@@ -240,7 +267,10 @@ export const Main = () => {
         </div>
         <div className="iframes-wrapper">
           <ul className="iframes-list">
-            <li className="iframe">
+            {videos?.map((item, index) => (
+              <VideoItem key={index} item={item}></VideoItem>
+            ))}
+            {/* <li className="iframe">
               <video height="100%" width="100" controls>
                 <source src={video} type="video/mp4" />
               </video>
@@ -259,7 +289,7 @@ export const Main = () => {
                   </a>
                 </div>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
       </main>
