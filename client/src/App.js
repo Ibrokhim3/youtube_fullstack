@@ -8,13 +8,7 @@ import { Register } from "./pages/register-page/register-page.js";
 function App() {
   return (
     <div className="App">
-      {/* <Register /> */}
       <Routes />
-
-      {/* <Login /> */}
-      {/* <Main /> */}
-
-      {/* <Admin /> */}
     </div>
   );
 }

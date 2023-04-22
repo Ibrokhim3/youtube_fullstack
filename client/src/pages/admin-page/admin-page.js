@@ -5,12 +5,14 @@ import "../../assets/css/material-icon-design.css";
 import signUpImg from "../../assets/img/signin-image.jpg";
 import deleteIcon from "../../assets/img/delete.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UserVideoItem } from "../../components/user-video-item/user-video-item";
 
 export const Admin = () => {
   const video = "https://www.w3schools.com/html/mov_bbb.mp4";
   const navigate = useNavigate();
 
+  const [videos, setVideos] = useState();
   const [cloud_url, setUrl] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [isDisabledUpload, setIsDisabledUpload] = useState(true);
@@ -22,6 +24,26 @@ export const Admin = () => {
   };
 
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      await fetch("http://localhost:3005/admin/user-videos")
+        .then((res) => {
+          if (res.status === 200) {
+            return res.json();
+          }
+          return Promise.reject(res);
+        })
+        .then((data) => {
+          setVideos(data.userVideos);
+          console.log(data.userVideos);
+        })
+        .catch((err) => {
+          return console.log(err);
+        });
+    };
+    dataFetch();
+  }, []);
 
   const uploadVideo = async (e) => {
     setIsDisabled(true);
@@ -77,7 +99,6 @@ export const Admin = () => {
       })
       .then((data) => {
         alert(data);
-        navigate("/youtube");
       })
       .catch(() => {
         alert("Something went wrong");
@@ -171,11 +192,19 @@ export const Admin = () => {
         </div>
         <div className="admin-wrapper">
           <ul className="videos-list">
-            <li className="video-item">
+            {videos?.map((item, index) => {
+              return <UserVideoItem key={index} item={item}></UserVideoItem>;
+            })}
+            {/* <li className="video-item">
               <video height="100%" width="100" controls>
                 <source src={video} type="video/mp4" />
               </video>
-              <p className="content" data-id="2" contentEditable="true">
+              <p
+                className="content"
+                data-id="2"
+                contentEditable="true"
+                suppressContentEditableWarning={true}
+              >
                 dars
               </p>
               <img
@@ -185,7 +214,7 @@ export const Admin = () => {
                 className="delete-icon"
                 data-id="2"
               />
-            </li>
+            </li> */}
           </ul>
         </div>
       </main>

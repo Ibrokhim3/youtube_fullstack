@@ -5,6 +5,7 @@ import { verifyToken } from "../middlewares/auth_middleware.js";
 const router = Router();
 
 router.get("/videos", videoCtr.GET_VIDEOS);
+router.get("/user-videos", videoCtr.GET_USER_VIDEOS);
 router.post("/add-video", videoCtr.ADD_VIDEO);
 
 export default router;

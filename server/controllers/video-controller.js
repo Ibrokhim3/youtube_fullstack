@@ -19,6 +19,8 @@ export const videoCtr = {
     try {
       const userData = await pool.query(`SELECT * FROM jwt`);
       const { user_id, user_name, image_title } = userData.rows[0];
+      // const userData = await pool.query(`SELECT * FROM jwt`);
+      // const { user_id, user_name, image_title } = userData.rows[0];
 
       const { video_title, cloud_url, name, mimetype, size } = req.body;
       // const { name, data, mimetype, size } = req.files.video;
@@ -40,5 +42,16 @@ export const videoCtr = {
     } catch (error) {
       return console.log(error.message);
     }
+  },
+  GET_USER_VIDEOS: async (req, res) => {
+    try {
+      const userData = await pool.query(`SELECT * FROM jwt`);
+      const { user_id, user_name, image_title } = userData.rows[0];
+      const userVideos = await pool.query(
+        `SELECT * FROM videos where created_by=$1`,
+        [user_id]
+      );
+      res.status(200).send({ msg: "User videos", userVideos: userVideos.rows });
+    } catch (error) {}
   },
 };
