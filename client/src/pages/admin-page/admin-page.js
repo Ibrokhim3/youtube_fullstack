@@ -12,10 +12,20 @@ export const Admin = () => {
   const navigate = useNavigate();
 
   const [cloud_url, setUrl] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabledUpload, setIsDisabledUpload] = useState(true);
+  const [btnActive, setBtnActive] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  const styles = {
+    opacity: btnActive ? 0.7 : 1,
+  };
 
   const token = localStorage.getItem("token");
 
   const uploadVideo = async (e) => {
+    setIsDisabled(true);
+    setLoading(true);
     const videoFile = e.target.files;
 
     const data = new FormData();
@@ -33,13 +43,16 @@ export const Admin = () => {
 
     const data2 = await res.json();
     setUrl(data2.secure_url);
-    // console.log(data2);
+    setIsDisabledUpload(false);
+    setBtnActive(false);
+    setLoading(false);
   };
+
+  const videoInput = document.getElementById("uploadInputVideo");
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
-    const videoInput = document.getElementById("uploadInputVideo");
     const videoFile = videoInput.files[0];
     const { name, size, mimetype } = videoFile;
 
@@ -135,9 +148,24 @@ export const Admin = () => {
                 onChange={(e) => uploadVideo(e)}
                 id="uploadInputVideo"
                 accept="video/*"
+                disabled={isDisabled}
               />
             </label>
-            <input type="submit" value="Upload" id="submitButton" />
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <input
+                disabled={isDisabledUpload}
+                type="submit"
+                value="Upload"
+                id="submitButton"
+                style={styles}
+              />
+              <span style={{ marginLeft: "25px" }}>
+                <span
+                  style={loading ? { display: "block" } : { display: "none" }}
+                  className="spinner"
+                ></span>
+              </span>
+            </div>
           </form>
           <img src={signUpImg} className="signup-image" />
         </div>

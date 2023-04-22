@@ -27,7 +27,7 @@ export const videoCtr = {
       // const url = path.join(__dirname, "./upload_video/", filename);
       await pool.query(
         `INSERT INTO videos (video_title, created_by, video_url, size) VALUES($1, $2, $3, $4) `,
-        [video_title, user_id, cloud_url, (size / 1048576).toFixed(2)]
+        [video_title, user_id, cloud_url, (+size / 1048576).toFixed(2)]
       );
 
       // req.files.video.mv(url, function (err) {
