@@ -12,23 +12,16 @@ export const Admin = () => {
   const navigate = useNavigate();
 
   const [cloud_url, setUrl] = useState("");
-  // const [video_file, setVideoFile] = useState();
 
   const token = localStorage.getItem("token");
-
-  // let videoFile = [];
-  const videoInput = document.getElementById("uploadInputVideo");
 
   const uploadVideo = async (e) => {
     const videoFile = e.target.files;
 
     const data = new FormData();
 
-    // setVideoFile(videoFile);
     data.append("file", videoFile[0]);
     data.append("upload_preset", "youtube");
-
-    console.log(videoFile[0]);
 
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dephdgqpo/video/upload",
@@ -40,22 +33,23 @@ export const Admin = () => {
 
     const data2 = await res.json();
     setUrl(data2.secure_url);
-    console.log(data2);
+    // console.log(data2);
   };
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
     const videoInput = document.getElementById("uploadInputVideo");
-    const video_file = evt.target.files;
-
-    // console.log(video_file);
+    const videoFile = videoInput.files[0];
+    const { name, size, mimetype } = videoFile;
 
     const formData = new FormData();
 
     formData.append("video_title", evt.target.video_title.value);
-    formData.append("video", video_file);
     formData.append("cloud_url", cloud_url);
+    formData.append("name", name);
+    formData.append("size", size);
+    formData.append("mimetype", mimetype);
 
     fetch("http://localhost:3005/admin/add-video", {
       method: "POST",
