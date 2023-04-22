@@ -2,6 +2,8 @@ import path from "path";
 import { pool } from "../config/db_config.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { __dirname } from "../server.js";
+import { __filename } from "../server.js";
 
 export const authCtr = {
   REGISTER: async (req, res) => {
@@ -20,22 +22,14 @@ export const authCtr = {
 
     const hashPsw = await bcrypt.hash(password, 12);
 
-    // const imgId = await pool.query(
-    //   `SELECT image_id from images where img_name=$1 `,
-    //   [filename]
-    // );
+    const url = path.join(__dirname, "./upload_img/", filename);
 
     await pool.query(
       `INSERT INTO users(user_name, password, profile_img) VALUES($1, $2, $3)`,
-      [username, hashPsw, filename]
+      [username, hashPsw, url]
     );
 
-    // await pool.query(
-    //   `INSERT INTO image_files(filename, filepath, mimetype, size, user_id) VALUES($1,$2,$3, $4, $5)`,
-    //   [filename, filepath, mimetype, size, foundedUser.rows[0].id]
-    // );
-
-    req.files.img.mv("./upload_img/" + filename, function (err) {
+    req.files.img.mv(url, function (err) {
       if (err) {
         return res.send(err);
       }

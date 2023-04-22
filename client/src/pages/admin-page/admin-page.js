@@ -5,23 +5,57 @@ import "../../assets/css/material-icon-design.css";
 import signUpImg from "../../assets/img/signin-image.jpg";
 import deleteIcon from "../../assets/img/delete.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const Admin = () => {
   const video = "https://www.w3schools.com/html/mov_bbb.mp4";
   const navigate = useNavigate();
 
+  const [cloud_url, setUrl] = useState("");
+  // const [video_file, setVideoFile] = useState();
+
+  const token = localStorage.getItem("token");
+
+  // let videoFile = [];
+  const videoInput = document.getElementById("uploadInputVideo");
+
+  const uploadVideo = async (e) => {
+    const videoFile = e.target.files;
+
+    const data = new FormData();
+
+    // setVideoFile(videoFile);
+    data.append("file", videoFile[0]);
+    data.append("upload_preset", "youtube");
+
+    console.log(videoFile[0]);
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dephdgqpo/video/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const data2 = await res.json();
+    setUrl(data2.secure_url);
+    console.log(data2);
+  };
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
-    const token = localStorage.getItem("token");
-
     const videoInput = document.getElementById("uploadInputVideo");
-    const videoFile = videoInput.files[0];
+    const video_file = evt.target.files;
+
+    // console.log(video_file);
 
     const formData = new FormData();
 
     formData.append("video_title", evt.target.video_title.value);
-    formData.append("video", videoFile);
+    formData.append("video", video_file);
+    formData.append("cloud_url", cloud_url);
 
     fetch("http://localhost:3005/admin/add-video", {
       method: "POST",
@@ -36,6 +70,7 @@ export const Admin = () => {
       })
       .then((data) => {
         alert(data);
+        navigate("/youtube");
       })
       .catch(() => {
         alert("Something went wrong");
@@ -103,6 +138,7 @@ export const Admin = () => {
               <input
                 name="video"
                 type="file"
+                onChange={(e) => uploadVideo(e)}
                 id="uploadInputVideo"
                 accept="video/*"
               />

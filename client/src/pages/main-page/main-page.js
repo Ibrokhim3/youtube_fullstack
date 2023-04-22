@@ -32,8 +32,6 @@ export const Main = () => {
     dataFetch();
   }, []);
 
-  console.log(videos);
-
   return (
     <div className="main-page__container">
       <header className="header">
@@ -57,7 +55,7 @@ export const Main = () => {
               </g>
             </svg>
           </button>
-          <a href="./index.html" title="YouTube Home">
+          <Link to={"/youtube"} title="YouTube Home">
             <svg
               viewBox="0 0 200 60"
               focusable="false"
@@ -92,7 +90,7 @@ export const Main = () => {
                 </g>
               </g>
             </svg>
-          </a>
+          </Link>
         </section>
         <form action="#" className="search-box">
           <input
