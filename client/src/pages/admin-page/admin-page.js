@@ -36,7 +36,6 @@ export const Admin = () => {
         })
         .then((data) => {
           setVideos(data.userVideos);
-          console.log(data.userVideos);
         })
         .catch((err) => {
           return console.log(err);

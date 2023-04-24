@@ -60,6 +60,8 @@ export const videoCtr = {
     try {
       const { id, video_title } = req.body;
 
+      console.log(req.body);
+
       const { id: id2, video_title: video_title2 } = videoCtr.GET_VIDEOS;
       await pool.query(`UPDATE videos SET video_title=$1 where id=$2`, [
         video_title,
