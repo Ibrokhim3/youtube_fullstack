@@ -1,9 +1,8 @@
 import deleteIcon from "../../assets/img/delete.png";
 
 export const UserVideoItem = ({
-  item: { video_title, created_at, video_url, size },
+  item: { video_title, created_at, video_url, size, id },
 }) => {
-  console.log(video_url);
   return (
     <li className="video-item">
       <video height="100%" width="100" controls>
@@ -11,7 +10,7 @@ export const UserVideoItem = ({
       </video>
       <p
         className="content"
-        data-id="2"
+        data-id={id}
         contentEditable="true"
         suppressContentEditableWarning={true}
       >

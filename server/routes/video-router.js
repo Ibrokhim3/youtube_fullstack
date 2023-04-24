@@ -7,5 +7,6 @@ const router = Router();
 router.get("/videos", videoCtr.GET_VIDEOS);
 router.get("/user-videos", videoCtr.GET_USER_VIDEOS);
 router.post("/add-video", videoCtr.ADD_VIDEO);
+router.put("/update-video", videoCtr.UPDATE_USER_VIDEOS);
 
 export default router;

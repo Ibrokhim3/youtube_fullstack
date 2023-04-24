@@ -52,6 +52,22 @@ export const videoCtr = {
         [user_id]
       );
       res.status(200).send({ msg: "User videos", userVideos: userVideos.rows });
-    } catch (error) {}
+    } catch (error) {
+      return console.log(error.message);
+    }
+  },
+  UPDATE_USER_VIDEOS: async (req, res) => {
+    try {
+      const { id, video_title } = req.body;
+
+      const { id: id2, video_title: video_title2 } = videoCtr.GET_VIDEOS;
+      await pool.query(`UPDATE videos SET video_title=$1 where id=$2`, [
+        video_title,
+        id,
+      ]);
+      res.status(200).send({ msg: "Video updated successfully", id2 });
+    } catch (error) {
+      return console.log(error.message);
+    }
   },
 };
