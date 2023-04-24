@@ -15,7 +15,7 @@ export const videoCtr = {
       return console.log(error.message);
     }
   },
-  ADD_VIDEO: async (req, res) => {
+  ADD_USER_VIDEOS: async (req, res) => {
     try {
       const userData = await pool.query(`SELECT * FROM jwt`);
       const { user_id, user_name, image_title } = userData.rows[0];
@@ -66,6 +66,16 @@ export const videoCtr = {
         id,
       ]);
       res.status(200).send({ msg: "Video updated successfully", id2 });
+    } catch (error) {
+      return console.log(error.message);
+    }
+  },
+  DELETE_USER_VIDEOS: async (req, res) => {
+    try {
+      const { id } = req.body;
+      const { id: id2 } = videoCtr.GET_VIDEOS;
+      await pool.query(`DELETE from videos where id=$1`, [id]);
+      res.status(200).send({ msg: "Video deleted successfully", id2 });
     } catch (error) {
       return console.log(error.message);
     }
